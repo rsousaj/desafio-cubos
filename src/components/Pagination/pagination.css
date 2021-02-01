@@ -1,0 +1,34 @@
+.pagination {
+  list-style-type: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pageClassName {
+  display: inline;
+  margin: 0.5rem;
+}
+
+.activeLink {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #00e8e4;
+  border-radius: 100%;
+  padding: 10px 15px 10px 15px;
+  background-color: #116193;
+  color: #00e8e4;
+}
+
+.activeClassName {
+  border: 2px #116193 solid;
+  border-radius: 100%;
+  padding: 12px 0px 12px 0;
+}
+
+/* border-width: 2px;
+border-style: solid;
+border-color: #00e8e4;
+border-radius: 100%;
+padding: 10px 15px 10px 15px;
+background-color: #116193;
+color: #00e8e4; */
