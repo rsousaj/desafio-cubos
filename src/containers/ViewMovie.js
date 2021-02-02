@@ -116,7 +116,9 @@ const ViewMovie = ({ fetchMovieDetails, selectedMovie, loading }) => {
           </table>
         </Caracteristicas>
         <ImagemContainer>
-          <img src="https://image.tmdb.org/t/p/w300/bqBGQUV1IsLP1zXwMxwgXwYfNG2.jpg" />
+          <img
+            src={`https://image.tmdb.org/t/p/w300/${selectedMovie.poster_path}`}
+          />
         </ImagemContainer>
       </Informacoes>
     </Container>

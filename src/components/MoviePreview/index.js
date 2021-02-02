@@ -80,6 +80,7 @@ const MoviePreview = ({
   index,
   viewMovie,
   id,
+  posterPath,
 }) => {
   const history = useHistory();
 
@@ -92,7 +93,7 @@ const MoviePreview = ({
     <Container>
       <ImagemContainer>
         <img
-          src={imagemExemplo}
+          src={`https://image.tmdb.org/t/p/w200${posterPath}`}
           onClick={() => onClick(index)}
           style={{ cursor: "pointer" }}
         />

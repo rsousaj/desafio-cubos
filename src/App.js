@@ -54,5 +54,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(App);
-
-//https://api.themoviedb.org/3/genre/movie/list?api_key=3dd201829f02c89e874cd7886778186a&language=pt-BR

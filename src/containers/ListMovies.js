@@ -32,6 +32,7 @@ const ListMovies = ({ movies, loading }) => {
               voteAverage={movie.vote_average}
               index={index}
               id={movie.id}
+              posterPath={movie.poster_path}
             />
           ))
         )}
