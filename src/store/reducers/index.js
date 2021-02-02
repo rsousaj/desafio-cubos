@@ -1,8 +1,14 @@
 import {
+  CLEARED_MOVIE_DETAIL,
+  LOADED_GENRES_REQUESTED,
   PAGE_CHANGED,
   SEARCH_MOVIE_FINISHED,
   SEARCH_MOVIE_REQUESTED,
   SEARCH_STRING_CHANGED,
+  LOADED_GENRES_COMPLETED,
+  VIEW_MOVIE_SELECTED,
+  MOVIE_DETAILS_COMPLETED,
+  MOVIE_DETAILS_REQUESTED,
 } from "../constants";
 
 const initialState = {
@@ -13,6 +19,10 @@ const initialState = {
   moviesShown: [],
   parte: 0,
   searchString: "",
+  loadingList: false,
+  genres: [],
+  selectedMovie: {},
+  movieLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +30,7 @@ export default (state = initialState, action) => {
     case SEARCH_MOVIE_REQUESTED:
       return {
         ...state,
+        loadingList: true,
       };
 
     case SEARCH_MOVIE_FINISHED:
@@ -32,6 +43,7 @@ export default (state = initialState, action) => {
         results,
         moviesShown,
         parte: 1,
+        loadingList: false,
       };
 
     case SEARCH_STRING_CHANGED:
@@ -52,6 +64,53 @@ export default (state = initialState, action) => {
         parte: page,
         moviesShown: state.results.slice(begin, end),
       };
+
+    case MOVIE_DETAILS_REQUESTED:
+      return {
+        ...state,
+        movieLoading: true,
+      };
+
+    case MOVIE_DETAILS_COMPLETED:
+      const UpdatedselectedMovie = Object.assign({}, state.selectedMovie);
+      UpdatedselectedMovie.budget = action.payload.budget;
+      UpdatedselectedMovie.original_language = action.payload.original_language;
+      UpdatedselectedMovie.status = action.payload.status;
+      UpdatedselectedMovie.revenue = action.payload.revenue;
+
+      return {
+        ...state,
+        selectedMovie: UpdatedselectedMovie,
+        movieLoading: false,
+      };
+
+    case CLEARED_MOVIE_DETAIL:
+      return {
+        ...state,
+        movieDetail: {},
+      };
+
+    case LOADED_GENRES_REQUESTED:
+      return {
+        ...state,
+      };
+
+    case LOADED_GENRES_COMPLETED:
+      console.log(action.payload);
+
+      return {
+        ...state,
+        genres: action.payload,
+      };
+
+    case VIEW_MOVIE_SELECTED:
+      const selectedMovie = Object.assign({}, state.results[action.payload]);
+      console.log(selectedMovie);
+      return {
+        ...state,
+        selectedMovie,
+      };
+
     default:
       return state;
   }

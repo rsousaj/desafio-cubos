@@ -15,19 +15,22 @@ const SearchInput = styled.input`
 const Search = ({ doSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const buscar = () => {
+  const buscar = (e) => {
+    e.preventDefault();
     doSearch(searchTerm);
   };
 
   return (
     <>
-      <SearchInput
-        type="text"
-        placeholder="Busque um filme por nome, ano ou gênero"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={buscar}>Pesquisar</button>
+      <form onSubmit={buscar}>
+        <SearchInput
+          type="text"
+          placeholder="Busque um filme por nome, ano ou gênero"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </form>
+      {/* <button onClick={buscar}>Pesquisar</button> */}
     </>
   );
 };

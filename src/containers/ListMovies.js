@@ -1,46 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import MoviePreview from "../components/MoviePreview";
 import Pagination from "../components/Pagination";
 import Search from "../components/Search";
+import Loader from "react-loader-spinner";
 
-const ListMovies = ({ movies }) => {
-  console.log("MOVIES ", movies);
+const ListMovies = ({ movies, loading }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [movies]);
 
   return (
     <>
-      <div
-        style={{
-          margin: 0,
-          marginBottom: "10px",
-          padding: "6px",
-          backgroundColor: "#116193",
-          color: "#00e8e4",
-          textAlign: "center",
-        }}
-      >
-        <h1>MOVIES</h1>
-      </div>
-      <div style={{ width: "90%", margin: "auto" }}>
+      <main style={{ width: "90%", margin: "auto" }}>
         <Search />
-        {movies &&
-          movies.map((movie) => (
+        {loading ? (
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={3000}
+            style={{ textAlign: "center" }}
+          />
+        ) : (
+          movies.map((movie, index) => (
             <MoviePreview
               title={movie.title}
               overview={movie.overview}
               releaseDate={movie.release_date}
               voteAverage={movie.vote_average}
+              index={index}
+              id={movie.id}
             />
-          ))}
+          ))
+        )}
 
         <Pagination />
-      </div>
+      </main>
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
   movies: state.moviesShown,
+  loading: state.loadingList,
 });
 
 export default connect(mapStateToProps)(ListMovies);
